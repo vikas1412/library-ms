@@ -1,3 +1,5 @@
 from django.contrib import admin
+from catalog.models import Author, Genre, Book, BookInstance, Language
 
-# Register your models here.
+
+admin.site.register((Book, Author, Genre, BookInstance, Language))
