@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Local Library{% endblock %}
+{% block title %}Books - Local Library{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -12,7 +12,7 @@
                     <thead>
                     </thead>
                     <tbody>
-                    <td>Authors</td>
+                    <td>Books</td>
                     <tr>
                         <td><a href="{% url 'index' %}">Home</a></td>
                     </tr>
@@ -28,37 +28,22 @@
             </div>
             <div class="col-lg-7 col-md-12 col-sm-12">
                 <div class="alert alert-primary" role="alert">
-                    Local library has following records.
+                    These are total number of books.
                 </div>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Book name(s)</th>
-                        <th scope="col">Availibility</th>
+                        <th scope="col">Title of the book</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for book in book_instance %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Total books</td>
-                        <td>{{ books|length }}</td>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ book.title }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Total copies</td>
-                        <td>{{ total_copies|length }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Available copies</td>
-                        <td>{{ available_books }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Authors</td>
-                        <td>{{ authors|length }}</td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

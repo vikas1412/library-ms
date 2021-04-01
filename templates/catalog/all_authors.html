@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Local Library{% endblock %}
+{% block title %}Authors - Local Library{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -34,31 +34,17 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Book name(s)</th>
-                        <th scope="col">Availibility</th>
+                        <th scope="col">Author name(s)</th>
+{#                        <th scope="col">Availibility</th>#}
                     </tr>
                     </thead>
                     <tbody>
+                    {% for author in authors %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Total books</td>
-                        <td>{{ books|length }}</td>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ author.first_name }} {{ author.last_name }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Total copies</td>
-                        <td>{{ total_copies|length }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Available copies</td>
-                        <td>{{ available_books }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Authors</td>
-                        <td>{{ authors|length }}</td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
