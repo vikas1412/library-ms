@@ -1,4 +1,5 @@
 .idea
-.pycache
+.__pycache__
 db.sqlite3
 .git
+.migrations
