@@ -1,0 +1,68 @@
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{% block title %}Local Library{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-3  col-md-3 col-sm-12">
+                <table class="table table-bordered">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    <td>Authors</td>
+                    <tr>
+                        <td><a href="{% url 'index' %}">Home</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{% url 'all_books' %}">All books</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{% url 'all-authors' %}">All authors</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="alert alert-primary" role="alert">
+                    Local library has following records.
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Book name(s)</th>
+                        <th scope="col">Availibility</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Total books</td>
+                        <td>{{ books|length }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Total copies</td>
+                        <td>{{ total_copies|length }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Available copies</td>
+                        <td>{{ available_books }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Authors</td>
+                        <td>{{ authors|length }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
