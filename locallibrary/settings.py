@@ -26,7 +26,7 @@ SECRET_KEY = 'rbee-t=&t$26_oz4tp&5iyp0q7dk4*j-n#cjye+1b$r#vv#a%1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.102', 'library14.herokuapp.com']
 
 
 # Application definition
