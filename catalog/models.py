@@ -43,6 +43,11 @@ class Book(models.Model):
         """Return the url to access detail record for this object"""
         return reverse('book-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        """Create a string for genre as Admin cannot support ManyToMany in 'list_display'"""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    display_genre.short_description = 'Genre'
+
 
 class BookInstance(models.Model):
     """Modal representing a specific copy of a book; (that can be borrowed from the library if available"""
@@ -66,7 +71,13 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """String representation for Modal obejct."""
-        return f"{self.id} ({self.book.title}"
+        return f"{self.id} ({self.book.title})"
+
+    def book_status(self):
+        return str(self.status)
+
+    def due_date_status(self):
+        return str(self.due_back)
 
 
 class Author(models.Model):
@@ -74,7 +85,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Died', null=True, blank=True)
+    date_of_death = models.DateField('Date of death', null=True, blank=True)
 
     class Meta:
         """Ordering of Author modal instance"""
