@@ -22,6 +22,7 @@ class BookListView(generic.ListView):
     model = Book
     template_name = "catalog/all_books.html"
     context_object_name = "book_instance"
+    paginate_by = 4
 
     def get_queryset(self):
         """Override to implement additional functionality like 'objects.filter()' instead of 'objects.all()'"""
