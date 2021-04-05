@@ -48,7 +48,7 @@
             <br>
             <input class="btn btn-primary mt-1" type="submit" value="Login">
             <input type="hidden" name="next" value="{{ next }}"><br>
-            <a style="float: right" href="{% url 'password_reset' %}">Forgot password</a>
+            <a style="float: right" href="{% url 'password_reset' %}">Forgot password?</a>
         </form>
     {% else %}
         <p>User is already authenticated. Go to <a href="{% url 'index' %}">homepage</a>.</p>
