@@ -40,8 +40,10 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     modal = Book
+    template_name = 'catalog/book_detail.html'
+    context_object_name = 'book'
 
-    
+
 def all_authors(request):
     all_authors = Author.objects.all()
     params = {
