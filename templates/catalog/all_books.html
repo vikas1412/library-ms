@@ -17,10 +17,10 @@
                         <td><a href="{% url 'index' %}">Home</a></td>
                     </tr>
                     <tr>
-                        <td><a href="{% url 'all_books' %}">All books</a></td>
+                        <td><a href="{% url 'books' %}">All books</a></td>
                     </tr>
                     <tr>
-                        <td><a href="{% url 'all-authors' %}">All authors</a></td>
+                        <td><a href="{% url 'authors' %}">All authors</a></td>
                     </tr>
 
                     </tbody>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-7 col-md-12 col-sm-12">
                 <div class="alert alert-primary" role="alert">
-                    These are total number of books.
+                    These are {{ total_books_demo }} number of books.
                 </div>
                 <table class="table">
                     <thead>
