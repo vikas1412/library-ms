@@ -2,63 +2,43 @@
 
 {% load static %}
 
-{% block title %}Books - Local Library{% endblock %}
+{% block title %}{{ author.first_name }} - Local Library{% endblock %}
 
 {% block style %}
 {% endblock %}
 
 {% block body %}
     <div class="alert alert-primary" role="alert">
-        <h5 style="color: black">{{ book.title }}</h5>
+        <h5 style="color: black">{{ author.first_name }} {{ author.last_name }}</h5>
     </div>
+    <small>{{ author.date_of_birth }}</small>
 
-    <ol class="list-group list-group">
+    <ol class="list-group list-group mt-3">
+
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">Summary</div>
-                {{ book.summary }}
+                <div class="fw-bold">Books :-</div>
             </div>
         </li>
+
+
+    {% if author.book_set.all %}
+        {% for book in author.book_set.all %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">ISBN</div>
-                {{ book.isbn }}
+                <div class="fw-bold">{{ forloop.counter }})  <a href="{{ book.get_absolute_url }}">{{ book.title }}</a></div>
+                <div style="font-size: 17px" class="ms-2 pt-1">{{ book.summary|truncatechars:'200' }}</div>
             </div>
         </li>
+    {% endfor %}
+        {% else %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">Language</div>
-                {{ book.language }}
+                <div style="color: palevioletred" class="fw-bold">'{{ author.first_name|capfirst }}' has not written any books</div>
             </div>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-                <div class="fw-bold">Genre</div>
-                {{ book.display_genre }}
-            </div>
-        </li>
+    {% endif %}
     </ol>
-
-
-    <div class="mt-5 alert alert-primary" role="alert">
-        <h5 style="color: black">Copies availability:</h5>
-    </div>
-
-    <ul class="list-group list-group-flush">
-
-        {% for copy in book.bookinstance_set.all %}
-            <li class="list-group-item">
-                <span class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</span><br>
-
-                {% if copy.status != 'a' %}
-                    <span><strong>Due to be returned: </strong>{{ copy.due_back }}<br></span>
-                {% endif %}
-                <span><strong>Imprint: </strong>{{ copy.imprint }}<br></span>
-                <span><strong>ID: </strong>{{ copy.id }}</span>
-
-            </li>
-        {% endfor %}
-
-    </ul>
+    <br><br><br>
 
 {% endblock %}

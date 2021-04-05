@@ -20,7 +20,7 @@
         {% for author in authors %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ author.first_name }} {{ author.last_name }}</td>
+                <td><a href="{% url 'author-detail' author.last_name author.id %}">{{ author.first_name }} {{ author.last_name }}</a> - <small>({{ author.date_of_birth }})</small></td>
             </tr>
         {% endfor %}
         </tbody>
