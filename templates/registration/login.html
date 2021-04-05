@@ -38,19 +38,20 @@
     {% endif %}
 
     {% if not user.is_authenticated %}
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <span>{{ form.username.label_text }}</span>
-        <span id="input">{{ form.username }}</span>
-        <br>
-        <span>{{ form.password.label_text }}</span>
-        <span id="input">{{ form.password }}</span>
-        <br>
-        <input class="btn btn-primary mt-1" type="submit" value="Login">
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <span>{{ form.username.label_text }}</span>
+            <span id="input">{{ form.username }}</span>
+            <br>
+            <span>{{ form.password.label_text }}</span>
+            <span id="input">{{ form.password }}</span>
+            <br>
+            <input class="btn btn-primary mt-1" type="submit" value="Login">
+            <input type="hidden" name="next" value="{{ next }}"><br>
+            <a style="float: right" href="{% url 'password_reset' %}">Forgot password</a>
+        </form>
     {% else %}
-    <p>User is already authenticated. Go to <a href="{% url 'index' %}">homepage</a>.</p>
+        <p>User is already authenticated. Go to <a href="{% url 'index' %}">homepage</a>.</p>
     {% endif %}
 
     <br><br><br><br>
