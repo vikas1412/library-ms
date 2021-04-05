@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from catalog.models import BookInstance, Book, Genre, Language, Author
+from django.views import generic
+
 
 def index(request):
 
@@ -16,12 +18,24 @@ def index(request):
     return render(request, 'catalog/index.html', params)
 
 
-def all_books(request):
-    book_instance = Book.objects.all()
-    params = {
-        'book_instance': book_instance,
-    }
-    return render(request, 'catalog/all_books.html', params)
+class BookListView(generic.ListView):
+    model = Book
+    template_name = "catalog/all_books.html"
+    context_object_name = "book_instance"
+
+    def get_queryset(self):
+        """Override to implement additional functionality like 'objects.filter()' instead of 'objects.all()'"""
+        return Book.objects.all()
+
+    def get_context_data(self, **kwargs):
+        """Override this method to pass more than 1 arguments
+        * First get the existing context from our superclass.
+        * Then add your new context information.
+        * Then return the new (updated) context.
+        """
+        context = super(BookListView, self).get_context_data(**kwargs)
+        context['total_books_demo'] = Book.objects.all().count()
+        return context
 
 
 def all_authors(request):
