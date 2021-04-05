@@ -6,6 +6,10 @@ from django.views import generic
 def index(request):
 
     total_book_instance = BookInstance.objects.all()
+
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     available_books = BookInstance.objects.filter(status__exact='a').count()
     authors = Author.objects.all()
     total_books = Book.objects.all()
@@ -14,6 +18,7 @@ def index(request):
         'authors': authors,
         'books': total_books,
         'total_copies': total_book_instance,
+        'num_visits': num_visits,
     }
     return render(request, 'catalog/index.html', params)
 
