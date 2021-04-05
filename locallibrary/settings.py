@@ -127,3 +127,6 @@ STATIC_URL = '/static/'
 
 # Use only for DEPLOYMENT
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
