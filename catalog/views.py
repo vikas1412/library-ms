@@ -38,6 +38,10 @@ class BookListView(generic.ListView):
         return context
 
 
+class BookDetailView(generic.DetailView):
+    modal = Book
+
+    
 def all_authors(request):
     all_authors = Author.objects.all()
     params = {
