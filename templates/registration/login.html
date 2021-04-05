@@ -1,0 +1,57 @@
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{% block title %}Login - Local Library{% endblock %}
+
+{% block body %}
+
+    <div class="alert alert-primary" role="alert">
+        Login to continue using the page!
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Login to your account :-</th>
+        </tr>
+        </thead>
+    </table>
+
+    {% if form.errors %}
+        <div class="p-1 alert alert-warning alert-dismissible fade show" role="alert">
+            <div style="width:95%"><strong>Your username & password didn't match. Please try
+                again.</strong>
+            </div>
+            <button type="button" class="p-2 btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please log in to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <span>{{ form.username.label_text }}</span>
+        <span id="input">{{ form.username }}</span>
+        <br>
+        <span>{{ form.password.label_text }}</span>
+        <span id="input">{{ form.password }}</span>
+        <br>
+        <input class="btn btn-primary mt-1" type="submit" value="Login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    {% else %}
+    <p>User is already authenticated. Go to <a href="{% url 'index' %}">homepage</a>.</p>
+    {% endif %}
+
+    <br><br><br><br>
+{% endblock %}
