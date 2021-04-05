@@ -42,7 +42,6 @@ class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'catalog/book_detail.html'
     context_object_name = 'book'
-    paginated_by = 10
 
 
 def all_authors(request):
