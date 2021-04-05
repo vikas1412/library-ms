@@ -54,7 +54,7 @@
         <tbody>
         {% for book in book_instance %}
             <tr>
-                <th scope="row">{{ forloop.counter }}</th>
+                <th scope="row">-</th>
                 <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a><br> - By: {{ book.author }}
                 </td>
             </tr>
