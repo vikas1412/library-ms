@@ -3,3 +3,6 @@
 .git
 .migrations
 sample_data.py
+__pycache__
+catalog/__pycache__
+locallibrary/__pycache__
