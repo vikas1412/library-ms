@@ -2,12 +2,14 @@ from django.db import models
 from django.urls import reverse
 import uuid
 
+
 class Genre(models.Model):
     """Model representing a book genre"""
     name = models.CharField(max_length=200, help_text="Enter a book genre")
 
     def __str__(self):
         return self.name
+
 
 class Language(models.Model):
     """Modal representing language; ie, English, French, etc. Book language variable uses it."""
