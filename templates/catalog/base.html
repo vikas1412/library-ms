@@ -58,6 +58,10 @@
                 <tr>
                     <td><a href="{% url 'authors' %}">All authors</a></td>
                 </tr>
+                <tr>
+                    <td><a href="{% url 'all-borrowers' %}">Borrowers</a></td>
+                </tr>
+
                 {% if not user.is_authenticated %}
                     <tr>
                         <td><a href="{% url 'login' %}">Login</a></td>

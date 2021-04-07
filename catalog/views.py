@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -93,3 +94,13 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'catalog/author_detail.html'
     context_object_name = 'author'
+
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'catalog/borrowed_books.html'
+    context_object_name = 'borrowed'
+    paginate_by = 6
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(status__icontains='o').order_by('due_back')

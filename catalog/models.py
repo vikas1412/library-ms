@@ -1,3 +1,6 @@
+import datetime
+
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 import uuid
@@ -53,7 +56,17 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     """Modal representing a specific copy of a book; (that can be borrowed from the library if available"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this copy of book across whole library")
+
+    @property
+    def is_overdue(self):
+        if self.due_back and datetime.date.today() > self.due_back:
+            return True
+        else:
+            return False
+
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this copy of "
+                                                                          "book across whole library")
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
@@ -69,10 +82,11 @@ class BookInstance(models.Model):
 
     class Meta:
         """Ordering of BorrowInstance objects"""
+        permissions = (('can_mark_returned', "Set book as returned"),)
         ordering = ['due_back']
 
     def __str__(self):
-        """String representation for Modal obejct."""
+        """String representation for Modal object."""
         return f"{self.id} ({self.book.title})"
 
     def book_status(self):
