@@ -2,6 +2,7 @@
 .__pycache__
 .git
 .migrations
+migrations
 sample_data.py
 __pycache__
 catalog/__pycache__
