@@ -13,5 +13,7 @@ urlpatterns = [
 
     path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
 
-    path('borrower/', views.LoanedBooksByUserListView.as_view(), name='all-borrowers')
+    path('borrower/', views.LoanedBooksByUserListView.as_view(), name='all-borrowers'),
+    path('my-borrowed/', views.MyBorrowedListView.as_view(), name='my-borrowed'),
+
 ]
