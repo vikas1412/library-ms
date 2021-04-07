@@ -1,0 +1,43 @@
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{% block title %}Rent - Local Library{% endblock %}
+
+{% block style %}
+    .helptext{
+    color: pink;
+    }
+    #id_renewal_date{
+    border:1px solid green;
+    }
+{% endblock %}
+
+{% block body %}
+
+    <div class="alert alert-primary" role="alert">
+        Rent a book from library!
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col" style="color: palevioletred">{{ book_instance.book.title }} :-</th>
+        </tr>
+        <p>Borrower: {{ book_instance.borrower }}</p>
+        </thead>
+    </table>
+
+    <p {% if book_instance.is_overdue %}class="text-danger"{% endif %}>Due date: {{ book_instance.due_back }}</p>
+
+
+    <form method="post" action="#">
+        {% csrf_token %}
+        {{ form.renewal_date.help_text }}
+        {{ form.renewal_date }}<br>
+        <span style="color: lightcoral; font-size: 14px">{{ form.renewal_date.errors }}</span> <br>
+        <input class="btn btn-primary mt-1" type="submit" value="Submit">
+    </form>
+    <br><br><br><br>
+{% endblock %}
