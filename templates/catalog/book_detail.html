@@ -52,7 +52,9 @@
                 <span class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</span><br>
 
                 {% if copy.status != 'a' %}
-                    <span><strong>Due to be returned: </strong>{{ copy.due_back }}<br></span>
+                    <br><span><strong>Due to be returned: </strong>{{ copy.due_back }}<br>
+                    To renew this book, <a href="{% url 'renew-book-librarian' copy.id %}">click here</a>.<br><br>
+                    </span>
                 {% endif %}
                 <span><strong>Imprint: </strong>{{ copy.imprint }}<br></span>
                 <span><strong>ID: </strong>{{ copy.id }}</span>
