@@ -1,0 +1,30 @@
+{#Default HTML file name: model_name_confirm_delete.html#}
+{#Can change suffix using 'template_name_suffix = 'any_name''#}
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{% block title %}Login - Local Library{% endblock %}
+
+{% block body %}
+
+    <div class="alert alert-primary" role="alert">
+        Delete users - Local Library
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Are you sure you want to delete the author: {{ author }}?</th>
+        </tr>
+        </thead>
+    </table>
+
+    <form method="post" action="#">
+        {% csrf_token %}
+        <input class="btn btn-primary mt-1" type="submit" value="Delete">
+    </form>
+
+    <br><br><br><br>
+{% endblock %}

@@ -1,0 +1,39 @@
+{#Default HTML file name: model_name_form.html#}
+{#Can change suffix using 'template_name_suffix = 'any_name''#}
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{%  block style %}
+tr{
+    content: "\a";
+    white-space: pre;
+}
+
+{% endblock %}
+
+{% block title %}Login - Local Library{% endblock %}
+
+{% block body %}
+
+    <div class="alert alert-primary" role="alert">
+        Create, update Users - Local Library
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Here you can create or update user profiles :-</th>
+        </tr>
+        </thead>
+    </table>
+
+        <form method="post" action="#">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary mt-1" type="submit" value="Submit">
+        </form>
+
+    <br><br><br><br>
+{% endblock %}

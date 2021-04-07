@@ -59,9 +59,9 @@
                     <td><a href="{% url 'authors' %}">All authors</a></td>
                 </tr>
                 {% if user.is_staff %}
-                <tr>
-                    <td><a href="{% url 'all-borrowers' %}">Borrowers</a></td>
-                </tr>
+                    <tr>
+                        <td><a href="{% url 'all-borrowers' %}">Borrowers</a></td>
+                    </tr>
                 {% endif %}
 
                 {% if not user.is_authenticated %}
@@ -70,11 +70,28 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td><a href="{% url 'login' %}"><span style="color: green">{{ user.username|capfirst }}</span></a><br>
-                         <li><a style="font-size: 16px" href="#">Profile</a></li>
-                         <li><a style="font-size: 16px" href="{% url 'my-borrowed' %}">My borrowed</a></li>
-                         <li><a style="font-size: 16px" href="{% url 'all-borrowers' %}">Other borrowers</a></li>
-                         <li><a style="font-size: 16px" href="{% url 'logout' %}">Logout</a></li></td>
+                        <td>
+                            <h6>
+                                <br>
+                                <a href="{% url 'login' %}"><span
+                                        style="color: green">{{ user.username|capfirst }}</span></a>
+                            </h6>
+                            <li><a style="font-size: 16px" href="#">Profile</a></li>
+                            <hr>
+                            <h6>Settings</h6>
+                            <li><a style="font-size: 16px" href="{% url 'my-borrowed' %}">My borrowed</a></li>
+                            <li><a style="font-size: 16px" href="{% url 'all-borrowers' %}">Other borrowers</a></li>
+                            <li><a style="font-size: 16px" href="{% url 'logout' %}">Logout</a></li>
+
+                            <hr>
+                            {% if user.is_staff %}
+                                <h6>Staff user</h6>
+                                <li><a style="font-size: 16px" href="{% url 'author-create' %}">Create user</a></li>
+                                <li><a style="font-size: 16px" href="#">Update user</a></li>
+                                <li><a style="font-size: 16px" href="#">Delete user</a></li>
+                                <hr>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endif %}
 

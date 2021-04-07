@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from catalog.forms import RenewBookForm
 from catalog.models import BookInstance, Book, Genre, Language, Author
@@ -115,3 +116,19 @@ class MyBorrowedListView(generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(borrower=self.request.user)
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+    initial = {'date_of_death', '11/06/2020'}
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = '__all__'
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('authors')
